@@ -78,60 +78,62 @@ public class LanzamientoDeDados extends JFrame {
             g.fillRect(0, 0, getWidth(), getHeight());
             g.setColor(Color.BLACK);
 
-            // Dibujo de los puntos según el valor del dado
+            // Dibujar puntos según el valor del dado, con la disposición real
             switch (valor) {
-                case 1 -> dibujarPunto(g, 1);
+                case 1 -> dibujarPunto(g, 5);
                 case 2 -> {
-                    dibujarPunto(g, 3);
-                    dibujarPunto(g, 7);
+                    dibujarPunto(g, 1);
+                    dibujarPunto(g, 9);
                 }
                 case 3 -> {
                     dibujarPunto(g, 1);
-                    dibujarPunto(g, 3);
-                    dibujarPunto(g, 7);
+                    dibujarPunto(g, 5);
+                    dibujarPunto(g, 9);
                 }
                 case 4 -> {
-                    dibujarPunto(g, 2);
-                    dibujarPunto(g, 4);
-                    dibujarPunto(g, 6);
-                    dibujarPunto(g, 8);
+                    dibujarPunto(g, 1);
+                    dibujarPunto(g, 3);
+                    dibujarPunto(g, 7);
+                    dibujarPunto(g, 9);
                 }
                 case 5 -> {
                     dibujarPunto(g, 1);
-                    dibujarPunto(g, 2);
-                    dibujarPunto(g, 4);
-                    dibujarPunto(g, 6);
-                    dibujarPunto(g, 8);
+                    dibujarPunto(g, 3);
+                    dibujarPunto(g, 5);
+                    dibujarPunto(g, 7);
+                    dibujarPunto(g, 9);
                 }
                 case 6 -> {
-                    dibujarPunto(g, 2);
+                    dibujarPunto(g, 1);
                     dibujarPunto(g, 3);
                     dibujarPunto(g, 4);
                     dibujarPunto(g, 6);
                     dibujarPunto(g, 7);
-                    dibujarPunto(g, 8);
+                    dibujarPunto(g, 9);
                 }
             }
         }
 
         // Método para dibujar los puntos del dado
         private void dibujarPunto(Graphics g, int posicion) {
-            int x = getWidth() / 4;
-            int y = getHeight() / 4;
+            int x = getWidth() / 3;
+            int y = getHeight() / 3;
 
+            // Matriz 3x3 para las posiciones de los puntos
             int[][] posiciones = {
-                    {2 * x, 2 * y}, // Centro (posición 1)
-                    {x, y},         // Esquina superior izquierda (posición 2)
-                    {3 * x, y},     // Esquina superior derecha (posición 3)
-                    {x, 3 * y},     // Esquina inferior izquierda (posición 4)
-                    {3 * x, 3 * y}, // Esquina inferior derecha (posición 5)
-                    {x, 2 * y},     // Medio izquierdo (posición 6)
-                    {3 * x, 2 * y}, // Medio derecho (posición 7)
-                    {2 * x, y},     // Medio superior (posición 8)
+                    {x / 2, y / 2},           // Posición 1 - Esquina superior izquierda
+                    {x + x / 2, y / 2},       // Posición 2 - Medio superior
+                    {2 * x + x / 2, y / 2},   // Posición 3 - Esquina superior derecha
+                    {x / 2, y + y / 2},       // Posición 4 - Medio izquierdo
+                    {x + x / 2, y + y / 2},   // Posición 5 - Centro
+                    {2 * x + x / 2, y + y / 2}, // Posición 6 - Medio derecho
+                    {x / 2, 2 * y + y / 2},   // Posición 7 - Esquina inferior izquierda
+                    {x + x / 2, 2 * y + y / 2}, // Posición 8 - Medio inferior
+                    {2 * x + x / 2, 2 * y + y / 2} // Posición 9 - Esquina inferior derecha
             };
 
             int[] punto = posiciones[posicion - 1];
-            g.fillOval(punto[0] - 10, punto[1] - 10, 20, 20); // Dibujo del círculo en la posición
+            g.fillOval(punto[0] - 5, punto[1] - 5, 10, 10); // Dibuja el círculo en la posición
         }
     }
 
@@ -142,3 +144,4 @@ public class LanzamientoDeDados extends JFrame {
         });
     }
 }
+
