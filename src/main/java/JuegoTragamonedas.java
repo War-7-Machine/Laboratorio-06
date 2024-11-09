@@ -8,6 +8,7 @@ public class JuegoTragamonedas extends JFrame {
     private RuedaPanel rueda1, rueda2, rueda3;
     private JButton spinButton;
     private JLabel resultadoLabel;
+    private ImageIcon backgroundImage;
 
     public JuegoTragamonedas() {
         setTitle("Juego Tragamonedas");
@@ -15,8 +16,23 @@ public class JuegoTragamonedas extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
+        // Imagen de fondo 
+        backgroundImage = new ImageIcon("casino_background.png");
+
+        // Panel de fondo con la imagen de casino
+        JPanel backgroundPanel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(backgroundImage.getImage(), 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        backgroundPanel.setLayout(new BorderLayout());
+        setContentPane(backgroundPanel);
+
         // Panel para las ruedas del tragamonedas
         JPanel panelRuedas = new JPanel();
+        panelRuedas.setOpaque(false); // Transparencia para mostrar el fondo
         panelRuedas.setLayout(new GridLayout(1, 3));
 
         rueda1 = new RuedaPanel();
@@ -38,10 +54,11 @@ public class JuegoTragamonedas extends JFrame {
 
         // Etiqueta de resultado
         resultadoLabel = new JLabel("¡Buena suerte!", SwingConstants.CENTER);
+        resultadoLabel.setForeground(Color.WHITE); // Cambiar color de texto para que se vea en el fondo
 
-        add(panelRuedas, BorderLayout.CENTER);
-        add(spinButton, BorderLayout.SOUTH);
-        add(resultadoLabel, BorderLayout.NORTH);
+        backgroundPanel.add(panelRuedas, BorderLayout.CENTER);
+        backgroundPanel.add(spinButton, BorderLayout.SOUTH);
+        backgroundPanel.add(resultadoLabel, BorderLayout.NORTH);
     }
 
     // Método para girar las ruedas
@@ -84,12 +101,13 @@ public class JuegoTragamonedas extends JFrame {
     // Clase interna para representar cada rueda del tragamonedas
     class RuedaPanel extends JPanel {
         private int valor; // Representa el símbolo actual de la rueda
-        private String[] simbolos = {"🍒", "🔔", "💎", "🍋", "🍉"}; // Símbolos de ejemplo
+        private String[] simbolos = {"🍒", "🔔", "💎", "🍋", "🍉"}; // Símbolos de las ruedas
 
         public RuedaPanel() {
             this.valor = 0; // Inicializar con el primer símbolo
             setPreferredSize(new Dimension(100, 100));
             setFont(new Font("SansSerif", Font.BOLD, 40));
+            setOpaque(false); 
         }
 
         // Método para girar la rueda
